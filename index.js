@@ -1,15 +1,13 @@
-function productExceptSelf(nums) {
-  const n = nums.length;
-  const result = new Array(n).fill(1);
-  let product = 1;
-  for (let i = 0; i < n; i++) {
-    result[i] *= product;
-    product *= nums[i];
+function searchMatrix(matrix, target) {
+  if (matrix.length === 0 || matrix[0].length === 0) return false;
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+  let row = 0;
+  let col = cols - 1;
+  while (row < rows && col >= 0) {
+    if (matrix[row][col] === target) return true;
+    else if (matrix[row][col] < target) row++;
+    else col--;
   }
-  product = 1;
-  for (let i = n - 1; i >= 0; i--) {
-    result[i] *= product;
-    product *= nums[i];
-  }
-  return result;
+  return false;
 }
