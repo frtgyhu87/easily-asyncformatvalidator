@@ -1,13 +1,16 @@
-function searchMatrix(matrix, target) {
-  if (matrix.length === 0 || matrix[0].length === 0) return false;
-  const rows = matrix.length;
-  const cols = matrix[0].length;
-  let row = 0;
-  let col = cols - 1;
-  while (row < rows && col >= 0) {
-    if (matrix[row][col] === target) return true;
-    else if (matrix[row][col] < target) row++;
-    else col--;
+function search(nums, target) {
+  let left = 0;
+  let right = nums.length - 1;
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    if (nums[mid] === target) return mid;
+    if (nums[left] <= nums[mid]) {
+      if (nums[left] <= target && target < nums[mid]) right = mid - 1;
+      else left = mid + 1;
+    } else {
+      if (nums[mid] < target && target <= nums[right]) left = mid + 1;
+      else right = mid - 1;
+    }
   }
-  return false;
+  return -1;
 }
